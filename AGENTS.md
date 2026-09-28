@@ -11,7 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # SGX PLANNER
 
 ## Что это
-SGX PLANNER — личный планировщик внутри Telegram (бот @sgxplanner_bot + Telegram Mini App):
+SGX PLANNER — личный планировщик внутри Telegram (бот @ezplaner_bot + Telegram Mini App):
 «Твоя жизнь в одном приложении. Одна голосовуха — задачи, встречи, еда, дневник. Фото еды —
 калории». Репозиторий вырос из шаблона AI Website Cloner (Next.js + shadcn/ui + Tailwind v4).
 

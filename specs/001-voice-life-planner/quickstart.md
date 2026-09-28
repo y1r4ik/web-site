@@ -6,7 +6,7 @@
 ## Что нужно
 
 - Node.js 24, Git, аккаунт Cloudflare (тариф Workers Free), Wrangler (`npx wrangler`).
-- Бот @sgxplanner_bot и его токен от @BotFather.
+- Бот @ezplaner_bot и его токен от @BotFather.
 - Ваш Telegram ID (владелец) — узнать можно у бота после первого запуска или у @userinfobot.
 - Для проверки из России — сеть, в которой открываются ресурсы Cloudflare (см.
   [research.md](./research.md), раздел о сетевых ограничениях).

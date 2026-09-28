@@ -1,4 +1,4 @@
-# Contract: Telegram-бот @sgxplanner_bot
+# Contract: Telegram-бот @ezplaner_bot
 
 **Транспорт**: вебхук `POST /bot/webhook` с секретом `X-Telegram-Bot-Api-Secret-Token`.
 Разрешённые апдейты: `message`, `callback_query`. Все тексты — на русском, без Markdown-разметки,

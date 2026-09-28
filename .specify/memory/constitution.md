@@ -2,7 +2,7 @@
 
 SGX PLANNER — личный планировщик внутри Telegram: «Твоя жизнь в одном приложении. Одна
 голосовуха — задачи, встречи, еда, дневник. Фото еды — калории». Продукт состоит из Telegram-бота
-@sgxplanner_bot и Telegram Mini App.
+@ezplaner_bot и Telegram Mini App.
 
 ## Core Principles
 
@@ -114,4 +114,4 @@ SGX PLANNER — личный планировщик внутри Telegram: «Т�
 - Каждый план и каждое ревью проверяют соответствие конституции. Усложнение без обоснования
   не принимается.
 
-**Version**: 1.1.0 | **Ratified**: 2026-09-29 | **Last Amended**: 2026-09-29
+**Version**: 1.1.1 | **Ratified**: 2026-09-29 | **Last Amended**: 2026-09-29
