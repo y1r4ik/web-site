@@ -1,4 +1,4 @@
-# Feature Specification: SGX PLANNER — голосовой планировщик жизни в Telegram (MVP)
+# Feature Specification: EZ Planner — голосовой планировщик жизни в Telegram (MVP)
 
 **Feature Branch**: `001-voice-life-planner`
 
@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "SGX PLANNER — MVP личного планировщика внутри Telegram (бот
+**Input**: User description: "EZ Planner — MVP личного планировщика внутри Telegram (бот
 @ezplaner_bot + Telegram Mini App). «Твоя жизнь в одном приложении. Одна голосовуха — задачи,
 встречи, еда, дневник. Фото еды — калории. Внутри Telegram». Одно голосовое сообщение в свободной
 форме раскладывается на задачи, встречи, приёмы пищи с калориями и КБЖУ и записи в дневнике; бот

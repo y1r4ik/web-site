@@ -1,4 +1,4 @@
-# Data Model: SGX PLANNER MVP (001-voice-life-planner)
+# Data Model: EZ Planner MVP (001-voice-life-planner)
 
 **Хранилище**: Cloudflare D1 (SQLite), схема в Drizzle ORM (`worker/db/schema.ts`), миграции в
 `migrations/`. Временные медиа — KV с TTL 24 часа (не таблица).

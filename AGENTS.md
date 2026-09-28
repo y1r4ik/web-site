@@ -8,10 +8,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# SGX PLANNER
+# EZ Planner
 
 ## Что это
-SGX PLANNER — личный планировщик внутри Telegram (бот @ezplaner_bot + Telegram Mini App):
+EZ Planner — личный планировщик внутри Telegram (бот @ezplaner_bot + Telegram Mini App):
 «Твоя жизнь в одном приложении. Одна голосовуха — задачи, встречи, еда, дневник. Фото еды —
 калории». Репозиторий вырос из шаблона AI Website Cloner (Next.js + shadcn/ui + Tailwind v4).
 
@@ -90,7 +90,7 @@ specs/              # Спецификации, планы и задачи фу�
 ## Agent Workflow
 - Команды spec-kit лежат в `.claude/skills/speckit-*`; не редактируй их вручную — они
   обновляются через `specify`.
-- `/clone-website` — наследие шаблона. Для SGX PLANNER используется только для разбора
+- `/clone-website` — наследие шаблона. Для EZ Planner используется только для разбора
   референсов, не для копирования чужих сайтов в продукт.
 - Edit `.agents/skills/clone-website/` for cloning-workflow changes. It is the canonical skill used by Codex, Cursor, and OpenCode.
 - Keep `.claude/commands/clone-website.md` as a thin Claude Code bridge to the canonical skill; do not duplicate the workflow there.

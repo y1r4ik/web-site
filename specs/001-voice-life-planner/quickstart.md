@@ -1,4 +1,4 @@
-# Quickstart: запуск и проверка SGX PLANNER MVP
+# Quickstart: запуск и проверка EZ Planner MVP
 
 Руководство, чтобы развернуть MVP и пройти сценарии приёмки из [spec.md](./spec.md). Детали API
 и бота — в [contracts/](./contracts/), структура данных — в [data-model.md](./data-model.md).
@@ -18,9 +18,9 @@ npm install
 
 # Ресурсы Cloudflare (один раз). Выведенные id вписать в wrangler.jsonc
 npx wrangler login
-npx wrangler d1 create sgx-planner
+npx wrangler d1 create ez-planner
 npx wrangler kv namespace create MEDIA
-npx wrangler queues create sgx-inputs
+npx wrangler queues create ez-inputs
 
 # Секреты (вводятся интерактивно, в репозиторий не попадают — принцип IV)
 npx wrangler secret put BOT_TOKEN

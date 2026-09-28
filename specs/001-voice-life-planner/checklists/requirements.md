@@ -1,4 +1,4 @@
-# Specification Quality Checklist: SGX PLANNER — голосовой планировщик жизни в Telegram (MVP)
+# Specification Quality Checklist: EZ Planner — голосовой планировщик жизни в Telegram (MVP)
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-09-29

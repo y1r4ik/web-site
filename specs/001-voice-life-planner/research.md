@@ -1,4 +1,4 @@
-# Research: SGX PLANNER MVP (001-voice-life-planner)
+# Research: EZ Planner MVP (001-voice-life-planner)
 
 **Дата**: 2026-09-29 · **Связано**: [plan.md](./plan.md), [spec.md](./spec.md)
 

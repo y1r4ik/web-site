@@ -1,4 +1,4 @@
-# Implementation Plan: SGX PLANNER — голосовой планировщик жизни в Telegram (MVP)
+# Implementation Plan: EZ Planner — голосовой планировщик жизни в Telegram (MVP)
 
 **Branch**: `001-voice-life-planner` | **Date**: 2026-09-29 | **Spec**: [spec.md](./spec.md)
 

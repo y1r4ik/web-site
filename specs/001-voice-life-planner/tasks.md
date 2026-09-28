@@ -1,9 +1,9 @@
 ---
 
-description: "Task list for SGX PLANNER MVP (001-voice-life-planner)"
+description: "Task list for EZ Planner MVP (001-voice-life-planner)"
 ---
 
-# Tasks: SGX PLANNER — голосовой планировщик жизни в Telegram (MVP)
+# Tasks: EZ Planner — голосовой планировщик жизни в Telegram (MVP)
 
 **Input**: Design documents from `/specs/001-voice-life-planner/`
 
@@ -38,12 +38,12 @@ description: "Task list for SGX PLANNER MVP (001-voice-life-planner)"
   `images: { unoptimized: true }`, `trailingSlash: false`. Проверить, что `npm run build` создаёт
   `out/`.
 - [ ] T003 Создать `wrangler.jsonc`:
-  - `name: "sgx-planner"`, `main: "worker/index.ts"`, `compatibility_date: "2026-09-01"`,
+  - `name: "ez-planner"`, `main: "worker/index.ts"`, `compatibility_date: "2026-09-01"`,
     `compatibility_flags: ["nodejs_compat"]`;
   - `assets`: `directory: "./out"`, `binding: "ASSETS"`,
     `not_found_handling: "single-page-application"`, `run_worker_first: ["/api/*", "/bot/*"]`;
   - `d1_databases` (binding `DB`), `kv_namespaces` (binding `MEDIA`);
-  - `queues`: producer `INPUTS` и consumer очереди `sgx-inputs` с `max_batch_size: 1`,
+  - `queues`: producer `INPUTS` и consumer очереди `ez-inputs` с `max_batch_size: 1`,
     `max_retries: 3`;
   - `ai` (binding `AI`), `triggers.crons: ["* * * * *"]`, `vars.MINI_APP_URL`;
   - окружение `staging` со своими ресурсами.
@@ -113,7 +113,7 @@ description: "Task list for SGX PLANNER MVP (001-voice-life-planner)"
   - общий обработчик ошибок в формате `{ error: { code, message } }` с русскими сообщениями.
 - [ ] T019 Создать каркас бота в `worker/bot/bot.ts`:
   - фабрика grammY `Bot` с `parse_mode: "HTML"`;
-  - middleware доступа: посторонним отвечать «Сейчас SGX PLANNER в закрытом тестировании. Ваш ID:
+  - middleware доступа: посторонним отвечать «Сейчас EZ Planner в закрытом тестировании. Ваш ID:
     <id> — отправьте его владельцу, чтобы получить доступ.» и ничего не сохранять;
   - `webhookCallback(bot, "cloudflare-mod", { secretToken: WEBHOOK_SECRET })`.
 - [ ] T020 Собрать точку входа `worker/index.ts`:
@@ -232,7 +232,7 @@ description: "Task list for SGX PLANNER MVP (001-voice-life-planner)"
   - текст (не команда) → `kind=text`;
   - прочие типы → подсказка из `contracts/bot.md`.
 - [ ] T040 [US1] Реализовать `/start` в `worker/bot/handlers/start.ts`:
-  - приветствие, что умеет бот, пример фразы, кнопка `web_app` «Открыть SGX PLANNER»;
+  - приветствие, что умеет бот, пример фразы, кнопка `web_app` «Открыть EZ Planner»;
   - если пояс не подтверждён — кнопки «Москва (UTC+3)» (`tz:Europe/Moscow`) и «Определить в
     приложении» (`web_app`).
 - [ ] T041 [US1] Реализовать кнопки в `worker/bot/handlers/callbacks.ts`:
@@ -460,7 +460,7 @@ description: "Task list for SGX PLANNER MVP (001-voice-life-planner)"
 - [ ] T084 [P] Добавить в `/start` и `/today` подсказку для случая, когда Mini App не открывается:
   голосовые и текст в чате работают без Mini App. Способы обхода ограничений не упоминаются
   (конституция 1.1.0).
-- [ ] T085 [P] Переписать `README.md` под SGX PLANNER: что это, как запустить (ссылка на
+- [ ] T085 [P] Переписать `README.md` под EZ Planner: что это, как запустить (ссылка на
   quickstart), где спецификации.
 - [ ] T086 Провести проверку безопасности:
   - все запросы в `worker/db/repo/` фильтруют по `user_id`;
