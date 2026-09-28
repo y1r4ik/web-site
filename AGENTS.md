@@ -8,17 +8,30 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Website Reverse-Engineer Template
+# SGX PLANNER
 
-## What This Is
-A reusable template for reverse-engineering any website into a clean, modern Next.js codebase using AI coding agents. The Next.js + shadcn/ui + Tailwind v4 base is pre-scaffolded — just run `/clone-website <url1> [<url2> ...]`.
+## Что это
+SGX PLANNER — личный планировщик внутри Telegram (бот @sgxplanner_bot + Telegram Mini App):
+«Твоя жизнь в одном приложении. Одна голосовуха — задачи, встречи, еда, дневник. Фото еды —
+калории». Репозиторий вырос из шаблона AI Website Cloner (Next.js + shadcn/ui + Tailwind v4).
+
+**Главный документ — конституция `.specify/memory/constitution.md`.** Она имеет приоритет над
+этим файлом. Перед любой работой прочитай её и спецификацию текущей функции в `specs/`.
+
+## Процесс (spec-kit)
+- Каждая функция: `/speckit-specify` → `/speckit-clarify` (по необходимости) → `/speckit-plan`
+  → `/speckit-tasks` → `/speckit-implement` → `/speckit-converge`.
+- Код пишется только по задачам из `specs/<функция>/tasks.md`. Ничего «заодно».
+- Документация (спецификации, планы, задачи) — на русском языке.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, React 19, TypeScript strict)
-- **UI:** shadcn/ui (Radix primitives, Tailwind CSS v4, `cn()` utility)
-- **Icons:** Lucide React (default — will be replaced/supplemented by extracted SVGs)
+- **UI:** shadcn/ui (Radix primitives, Tailwind CSS v4, `cn()` utility) — только как основа,
+  внешний вид задаёт `DESIGN.md`
+- **Icons:** Lucide React
 - **Styling:** Tailwind CSS v4 with oklch design tokens
-- **Deployment:** Vercel
+- **Платформа:** Telegram Mini App + бот; серверная часть и хостинг выбираются в плане первой
+  функции
 
 ## Commands
 - `npm run dev` — Start dev server
@@ -35,10 +48,13 @@ A reusable template for reverse-engineering any website into a clean, modern Nex
 - Responsive: mobile-first
 
 ## Design Principles
-- **Pixel-perfect emulation** — match the target's spacing, colors, typography exactly
-- **No personal aesthetic changes during emulation phase** — match 1:1 first, customize later
-- **Real content** — use actual text and assets from the target site, not placeholders
-- **Beauty-first** — every pixel matters
+- **Один DESIGN.md** — весь интерфейс строится по `DESIGN.md` в корне репозитория (токены цвета,
+  типографики, отступов, компонентов). Пока файл не выбран — только функциональная вёрстка.
+- **Никаких «дефолтных» видов** — shadcn/ui без стилизации под DESIGN.md не выпускается.
+- **Никаких чужих брендов** — логотипы, названия и закрытые шрифты из референсов не используются.
+- **Telegram-first** — мобильный экран от 320 px, тема Telegram, safe area, кнопки «Назад» и
+  главная кнопка Telegram.
+- **Русский интерфейс** — 24-часовое время, метрическая система, ккал.
 
 ## Project Structure
 ```
@@ -59,14 +75,22 @@ docs/
   research/         # Inspection output (design tokens, components, layout)
   design-references/ # Screenshots and visual references
 scripts/            # Asset download scripts
+specs/              # Спецификации, планы и задачи функций (spec-kit)
+.specify/           # Конституция, шаблоны и скрипты spec-kit
 .agents/
   skills/
-    clone-website/  # Canonical cross-agent cloning workflow
+    clone-website/  # Canonical cross-agent cloning workflow (наследие шаблона)
 .claude/
   commands/
     clone-website.md # Thin Claude Code invocation bridge
+  skills/
+    speckit-*/      # Команды spec-kit для Claude Code
 ```
 
 ## Agent Workflow
+- Команды spec-kit лежат в `.claude/skills/speckit-*`; не редактируй их вручную — они
+  обновляются через `specify`.
+- `/clone-website` — наследие шаблона. Для SGX PLANNER используется только для разбора
+  референсов, не для копирования чужих сайтов в продукт.
 - Edit `.agents/skills/clone-website/` for cloning-workflow changes. It is the canonical skill used by Codex, Cursor, and OpenCode.
 - Keep `.claude/commands/clone-website.md` as a thin Claude Code bridge to the canonical skill; do not duplicate the workflow there.

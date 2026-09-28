@@ -1,50 +1,115 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# SGX PLANNER Constitution
+
+SGX PLANNER — личный планировщик внутри Telegram: «Твоя жизнь в одном приложении. Одна
+голосовуха — задачи, встречи, еда, дневник. Фото еды — калории». Продукт состоит из Telegram-бота
+@sgxplanner_bot и Telegram Mini App.
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Telegram-first
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- Продукт MUST работать внутри Telegram: бот принимает сообщения, Mini App показывает и
+  редактирует данные. Отдельный сайт вне Telegram — не цель MVP.
+- Основной экран — мобильный телефон в портретной ориентации. Каждый экран MUST быть удобен
+  одной рукой на ширине от 320 px.
+- Mini App MUST учитывать светлую и тёмную тему Telegram, безопасные зоны (safe area),
+  системную кнопку «Назад» и главную кнопку Telegram там, где они уместны.
+- Вход — через Telegram. Отдельная регистрация (логин, пароль, почта) запрещена.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Обоснование: пользователь уже находится в Telegram. Любой лишний шаг наружу снижает удержание.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Голос и фото — главный ввод
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+- Каждый основной сценарий создания записи (задача, встреча, приём пищи, запись в дневнике)
+  MUST запускаться одним голосовым сообщением или одним фото.
+- Ручной ввод текстом MUST оставаться доступным как запасной путь для каждого сценария.
+- Результат разбора ввода ИИ MUST быть виден пользователю, и пользователь MUST иметь
+  возможность исправить или отменить любую созданную запись.
+- Если ИИ не уверен (время, дата, тип записи, продукт на фото), приложение MUST переспросить
+  или показать предположение как черновик, а не молча сохранять ошибку.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Обоснование: ценность продукта — «одна голосовуха вместо пяти приложений». Доверие к ней держится
+на том, что ошибки ИИ всегда видны и легко исправляются.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Собственный дизайн по DESIGN.md
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- Весь интерфейс MUST строиться по одному файлу `DESIGN.md` в корне репозитория: цвета,
+  типографика, отступы, радиусы, тени и состояния компонентов берутся из него в виде токенов.
+- Компоненты shadcn/ui допустимы только как основа. Использовать их внешний вид «по умолчанию»
+  без стилизации под DESIGN.md запрещено.
+- Чужие логотипы, названия брендов, иллюстрации и фирменные шрифты с закрытой лицензией
+  использовать запрещено. Стиль-референс — источник правил, а не материал для копирования.
+- До выбора DESIGN.md допускается только функциональная вёрстка без финальной стилизации.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Обоснование: главный риск — получить «ещё одно типовое приложение». Единый дизайн-документ
+делает стиль узнаваемым и одинаковым на всех экранах.
+
+### IV. Приватность личных данных
+
+- Задачи, встречи, питание и дневник — личные данные. Приложение MUST собирать только то,
+  что нужно для работы функции, и MUST показывать пользователю, что хранится.
+- Ключи API (распознавание речи, ИИ-модели, распознавание еды) и токен бота MUST храниться
+  только на сервере. Попадание секретов в клиентский код или репозиторий запрещено.
+- Голосовые сообщения и фото MUST обрабатываться только для извлечения данных. Хранить
+  исходные файлы дольше необходимого без явного согласия пользователя запрещено.
+- Пользователь MUST иметь способ удалить отдельную запись и все свои данные целиком.
+- Данные одного пользователя MUST быть недоступны другому. Каждый запрос к данным проверяет
+  подлинность Telegram-пользователя на сервере.
+
+Обоснование: дневник и питание — чувствительная информация. Потеря доверия здесь необратима.
+
+### V. Простота и маленькие шаги
+
+- Сначала MVP: каждая функция проходит путь spec-kit (specify → plan → tasks → implement)
+  отдельной спецификацией и попадает к пользователю как законченный вертикальный срез.
+- Новая зависимость, сервис или слой абстракции MUST быть обоснованы в плане функции.
+  Без обоснования выбирается самый простой вариант (YAGNI).
+- Функции, не описанные в спецификации, не реализуются «заодно».
+
+Обоснование: продукт широкий (четыре типа записей, голос, фото, календарь). Без жёстких рамок
+он не дойдёт до первого релиза.
+
+### VI. Качество и проверяемость
+
+- TypeScript в строгом режиме. Тип `any` запрещён.
+- Перед слиянием в `master` MUST проходить `lint`, `typecheck` и `build` в CI на GitHub.
+- Каждая пользовательская история в спецификации MUST иметь проверяемые сценарии приёмки
+  (Given / When / Then). Реализация считается готовой, когда они выполняются.
+- Интерфейс, тексты бота и сообщения об ошибках — на русском языке. Даты, время и единицы —
+  в российском формате (24-часовое время, метрическая система, ккал).
+
+Обоснование: разработка идёт с ИИ-агентом. Автоматические проверки и явные сценарии приёмки —
+единственная надёжная защита от незаметных поломок.
+
+## Технологические рамки
+
+- Код приложения живёт в репозитории `y1r4ik/web-site` на базе шаблона: Next.js 16 (App Router),
+  React 19, TypeScript, Tailwind CSS v4, shadcn/ui. Смена базового стека требует поправки к
+  конституции.
+- Серверная часть (приём сообщений бота, обращения к ИИ, хранение данных) выбирается в плане
+  первой функции с учётом принципа IV. Размещение должно быть доступно из России.
+- Дизайн-референсы берутся из каталога VoltAgent/awesome-design-md. Выбранный файл копируется
+  в корень репозитория как `DESIGN.md` с указанием источника.
+- Документация проекта (спецификации, планы, задачи) ведётся на русском языке.
+
+## Процесс разработки и контроль качества
+
+- Порядок работы по каждой функции: `/speckit-specify` → при необходимости `/speckit-clarify` →
+  `/speckit-plan` → `/speckit-tasks` → `/speckit-implement` → `/speckit-converge`.
+- Работа ведётся в отдельных ветках. Слияние в `master` — после зелёного CI и согласия
+  владельца продукта.
+- Раздел Constitution Check в каждом плане MUST явно проверять принципы I–VI. Нарушение
+  допускается только с записью в разделе Complexity Tracking и обоснованием.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Эта конституция имеет приоритет над остальными инструкциями репозитория, включая `AGENTS.md`.
+  Принципы «пиксель-в-пиксель клонирования» из исходного шаблона к SGX PLANNER не применяются.
+- Поправки вносятся через `/speckit-constitution` с отчётом о влиянии и согласием владельца
+  продукта.
+- Версионирование: MAJOR — удаление или переопределение принципа; MINOR — новый принцип или
+  раздел либо существенное расширение; PATCH — уточнения формулировок.
+- Каждый план и каждое ревью проверяют соответствие конституции. Усложнение без обоснования
+  не принимается.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-09-29 | **Last Amended**: 2026-09-29
