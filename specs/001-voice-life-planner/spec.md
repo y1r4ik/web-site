@@ -4,7 +4,9 @@
 
 **Created**: 2026-09-29
 
-**Status**: Draft
+**Status**: Superseded — продуктовый охват заменён спецификацией
+[002-day-planner](../002-day-planner/spec.md) (планер дня со шкалой времени). Основа 001 (доступ,
+платформа, приватность, лимиты ИИ) перенесена в 002.
 
 **Input**: User description: "EZ Planner — MVP личного планировщика внутри Telegram (бот
 @ezplaner_bot + Telegram Mini App). «Твоя жизнь в одном приложении. Одна голосовуха — задачи,

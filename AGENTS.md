@@ -11,9 +11,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # EZ Planner
 
 ## Что это
-EZ Planner — личный планировщик внутри Telegram (бот @ezplaner_bot + Telegram Mini App):
-«Твоя жизнь в одном приложении. Одна голосовуха — задачи, встречи, еда, дневник. Фото еды —
-калории». Репозиторий вырос из шаблона AI Website Cloner (Next.js + shadcn/ui + Tailwind v4).
+EZ Planner — планер дня внутри Telegram (бот @ezplaner_bot + Telegram Mini App): вертикальная
+шкала дня с задачами по времени, полоса недели, Входящие, повторы и напоминания; дополнительно —
+задачи голосом или текстом через ИИ и калории по фото блюда. Актуальная спецификация —
+`specs/002-day-planner/` (001 заменена). Репозиторий вырос из шаблона AI Website Cloner
+(Next.js + shadcn/ui + Tailwind v4).
 
 **Главный документ — конституция `.specify/memory/constitution.md`.** Она имеет приоритет над
 этим файлом. Перед любой работой прочитай её и спецификацию текущей функции в `specs/`.
